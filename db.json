@@ -1,0 +1,39 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "userId": 101,
+      "username": "Alice",
+      "token": "333333.997748.7476663"
+    },
+    {
+      "id": 2,
+      "userId": 102,
+      "username": "Bob",
+      "token": "333333.997748.7476663"
+    },
+    {
+      "id": 3,
+      "userId": 103,
+      "username": "Carol",
+      "token": "333333.997748.7476663"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
