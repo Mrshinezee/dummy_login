@@ -1,25 +1,42 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import {connect} from 'react-redux'
+import LoginComponent from './components/LoginComponent';
+// import SignUpComponent from './components/SignUpComponent';
+import {autoLogin, Logout} from './actions/userActions'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends React.Component{
+
+  componentDidMount(){
+    this.props.autoLogin()
+  }
+
+  render(){
+    return (
+      <div className="App">
+            {
+              !this.props.userReducer.loggedIn ? <h1>Login!</h1> : <h1>Welcome, {this.props.userReducer.user.username}</h1>
+            }
+           {/* <SignUpComponent/> */}
+           {!this.props.userReducer.loggedIn && <LoginComponent/>}
+           {this.props.userReducer.loggedIn && <button onClick={()=>this.props.Logout()}>Logout</button>}
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    userReducer: state.userReducer
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    autoLogin: () => dispatch(autoLogin()),
+    Logout: () => dispatch(Logout())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
